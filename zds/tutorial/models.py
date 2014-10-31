@@ -483,7 +483,8 @@ class PubliableContent(Container):
 
 def get_last_tutorials():
     n = settings.ZDS_APP['tutorial']['home_number']
-    tutorials = Tutorial.objects.all()\
+    tutorials = PubliableContent.objects.all()\
+        .exclude(type="ARTICLE")\
         .exclude(sha_public__isnull=True)\
         .exclude(sha_public__exact='')\
         .order_by('-pubdate')[:n]
